@@ -162,7 +162,7 @@ git push -u origin main
 已在当前手机上验证：
 
 - App 安装、启动、UI、权限申请
-- **真实运营商短信 → 入队 → 邮箱 SMTP 发送成功**（真机端到端，截图和日志中的号码/邮箱已脱敏，不进入仓库）
+- **真实运营商短信 → 入队 → 邮箱 SMTP 发送成功**（真机端到端；仓库内截图使用无个人信息版本，不包含真实号码或邮箱）
 - Webhook：真实 HTTP POST、JSON 编码、中文正文
 - SMTP：连接 `smtp.qq.com:465`、TLS 握手、AUTH LOGIN（用错误授权码验证了错误提示）
 - 短信解析：用合法 GSM SMS-DELIVER PDU 走真实 `SmsReceiver` 代码路径，正确解析发件人/正文并入队
