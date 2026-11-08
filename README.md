@@ -136,7 +136,14 @@ powershell -ExecutionPolicy Bypass -File .\build.ps1 -Install
 
 ## 发布到 GitHub
 
-仓库已经整理为可直接推送的结构，根目录执行：
+本目录已经初始化为 Git 仓库并完成首个提交（`Initial release: SMS Forwarder for Android`）。直接添加远端即可：
+
+```bash
+git remote add origin git@github.com:<你的用户名>/<仓库名>.git
+git push -u origin main
+```
+
+如果是从压缩包/裸文件重新开始：
 
 ```bash
 git init -b main
