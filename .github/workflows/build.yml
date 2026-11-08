@@ -18,18 +18,22 @@ jobs:
           distribution: temurin
           java-version: "21"
 
-      - name: Set up Android SDK
-        uses: android-actions/setup-android@v3
-
-      - name: Install Android platform and build tools
+      - name: Show Android SDK
         shell: pwsh
         run: |
-          ("y`n" * 20) | sdkmanager --licenses
-          sdkmanager "platforms;android-36" "build-tools;36.1.0"
+          if (-not $env:ANDROID_HOME -and (Test-Path "C:\Android\android-sdk")) {
+            $env:ANDROID_HOME = "C:\Android\android-sdk"
+          }
+          Write-Host "ANDROID_HOME=$env:ANDROID_HOME"
+          Get-ChildItem "$env:ANDROID_HOME\platforms" -ErrorAction SilentlyContinue | Select-Object Name
+          Get-ChildItem "$env:ANDROID_HOME\build-tools" -ErrorAction SilentlyContinue | Select-Object Name
 
       - name: Build release APK
         shell: pwsh
         run: |
+          if (-not $env:ANDROID_HOME -and (Test-Path "C:\Android\android-sdk")) {
+            $env:ANDROID_HOME = "C:\Android\android-sdk"
+          }
           Set-ExecutionPolicy Bypass -Scope Process -Force
           .\build.ps1
 
