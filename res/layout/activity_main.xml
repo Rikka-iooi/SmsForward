@@ -1,0 +1,885 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    android:clipToPadding="false"
+    android:fillViewport="true"
+    android:overScrollMode="never"
+    android:scrollbars="none">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="18dp"
+        android:paddingTop="18dp"
+        android:paddingEnd="18dp"
+        android:paddingBottom="32dp">
+
+        <!-- Header -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="46dp"
+                android:layout_height="46dp"
+                android:background="@drawable/bg_logo"
+                android:contentDescription="@string/app_name"
+                android:padding="11dp"
+                android:src="@drawable/ic_message_forward" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:includeFontPadding="false"
+                    android:text="@string/app_name"
+                    android:textColor="@color/text"
+                    android:textSize="23sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:includeFontPadding="false"
+                    android:letterSpacing="0.16"
+                    android:text="@string/app_subtitle"
+                    android:textColor="@color/muted"
+                    android:textSize="9sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/statusPill"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_pill_idle"
+                android:fontFamily="sans-serif-medium"
+                android:includeFontPadding="false"
+                android:paddingStart="12dp"
+                android:paddingTop="7dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="7dp"
+                android:text="已暂停"
+                android:textColor="@color/muted"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <!-- Master switch and stats -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:background="@drawable/bg_card"
+            android:elevation="1dp"
+            android:orientation="vertical"
+            android:outlineProvider="background"
+            android:padding="18dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="自动转发"
+                        android:textColor="@color/text"
+                        android:textSize="17sp" />
+
+                    <TextView
+                        android:id="@+id/statusDetail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:lineSpacingExtra="2dp"
+                        android:text="开启后，新收到的短信会自动转发"
+                        android:textColor="@color/muted"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <Switch
+                    android:id="@+id/switchEnabled"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:thumbTint="@color/white"
+                    android:trackTint="@color/switch_track" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/line" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/statSent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-medium"
+                        android:includeFontPadding="false"
+                        android:text="0"
+                        android:textColor="@color/text"
+                        android:textSize="21sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="已转发"
+                        android:textColor="@color/muted"
+                        android:textSize="11sp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="28dp"
+                    android:background="@color/line" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/statPending"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-medium"
+                        android:includeFontPadding="false"
+                        android:text="0"
+                        android:textColor="@color/text"
+                        android:textSize="21sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="待发送"
+                        android:textColor="@color/muted"
+                        android:textSize="11sp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="28dp"
+                    android:background="@color/line" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/statFailed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-medium"
+                        android:includeFontPadding="false"
+                        android:text="0"
+                        android:textColor="@color/text"
+                        android:textSize="21sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="失败"
+                        android:textColor="@color/muted"
+                        android:textSize="11sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/permissionBanner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:background="@drawable/bg_warn"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="12dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:background="@drawable/bg_warn_icon"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="center"
+                    android:text="!"
+                    android:textColor="@color/warn"
+                    android:textSize="13sp" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/permissionTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="需要短信权限"
+                        android:textColor="@color/text"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/permissionHint"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:lineSpacingExtra="2dp"
+                        android:text="只读取新短信，不读取历史记录"
+                        android:textColor="@color/muted"
+                        android:textSize="11sp" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/btnGrant"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_pill_active"
+                    android:fontFamily="sans-serif-medium"
+                    android:paddingStart="12dp"
+                    android:paddingTop="7dp"
+                    android:paddingEnd="12dp"
+                    android:paddingBottom="7dp"
+                    android:text="去授权"
+                    android:textColor="@color/accent"
+                    android:textSize="11sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Channel settings -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:background="@drawable/bg_card"
+            android:elevation="1dp"
+            android:orientation="vertical"
+            android:outlineProvider="background"
+            android:padding="18dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-medium"
+                android:text="转发方式"
+                android:textColor="@color/text"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:text="短信将通过下面选中的通道发送"
+                android:textColor="@color/muted"
+                android:textSize="12sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:background="@drawable/bg_segment"
+                android:orientation="horizontal"
+                android:padding="3dp">
+
+                <TextView
+                    android:id="@+id/tabEmail"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_segment_selected"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="center"
+                    android:text="邮箱"
+                    android:textColor="@color/accent"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/tabWebhook"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="center"
+                    android:text="Webhook"
+                    android:textColor="@color/muted"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <!-- Email panel -->
+            <LinearLayout
+                android:id="@+id/emailPanel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:text="邮箱服务"
+                    android:textColor="@color/muted"
+                    android:textSize="12sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="6dp"
+                    android:background="@drawable/bg_input"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <Spinner
+                        android:id="@+id/spinnerProvider"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="0dp"
+                        android:spinnerMode="dropdown" />
+
+                    <TextView
+                        android:layout_width="32dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="▾"
+                        android:textColor="@color/muted"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="SMTP 服务器"
+                            android:textColor="@color/muted"
+                            android:textSize="12sp" />
+
+                        <EditText
+                            android:id="@+id/editHost"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:layout_marginTop="6dp"
+                            android:background="@drawable/bg_input"
+                            android:gravity="center_vertical"
+                            android:hint="smtp.qq.com"
+                            android:importantForAutofill="no"
+                            android:inputType="textUri"
+                            android:maxLines="1"
+                            android:paddingStart="12dp"
+                            android:paddingEnd="12dp"
+                            android:singleLine="true"
+                            android:textColor="@color/text"
+                            android:textColorHint="@color/faint"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="92dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="端口"
+                            android:textColor="@color/muted"
+                            android:textSize="12sp" />
+
+                        <EditText
+                            android:id="@+id/editPort"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:layout_marginTop="6dp"
+                            android:background="@drawable/bg_input"
+                            android:gravity="center_vertical"
+                            android:hint="465"
+                            android:importantForAutofill="no"
+                            android:inputType="number"
+                            android:maxLength="5"
+                            android:maxLines="1"
+                            android:paddingStart="12dp"
+                            android:paddingEnd="12dp"
+                            android:singleLine="true"
+                            android:textColor="@color/text"
+                            android:textColorHint="@color/faint"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="加密方式"
+                    android:textColor="@color/muted"
+                    android:textSize="12sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="6dp"
+                    android:background="@drawable/bg_input"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <Spinner
+                        android:id="@+id/spinnerSecurity"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="0dp"
+                        android:spinnerMode="dropdown" />
+
+                    <TextView
+                        android:layout_width="32dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="▾"
+                        android:textColor="@color/muted"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="邮箱账号"
+                    android:textColor="@color/muted"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/editUser"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="6dp"
+                    android:background="@drawable/bg_input"
+                    android:gravity="center_vertical"
+                    android:hint="yourname@qq.com"
+                    android:importantForAutofill="no"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:singleLine="true"
+                    android:textColor="@color/text"
+                    android:textColorHint="@color/faint"
+                    android:textSize="14sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="授权码 / 密码"
+                        android:textColor="@color/muted"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/btnTogglePass"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="4dp"
+                        android:text="显示"
+                        android:textColor="@color/accent"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/editPass"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="6dp"
+                    android:background="@drawable/bg_input"
+                    android:gravity="center_vertical"
+                    android:hint="QQ邮箱填16位授权码"
+                    android:importantForAutofill="no"
+                    android:inputType="textPassword"
+                    android:maxLines="1"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:singleLine="true"
+                    android:textColor="@color/text"
+                    android:textColorHint="@color/faint"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="收件邮箱"
+                    android:textColor="@color/muted"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/editRecipients"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="6dp"
+                    android:background="@drawable/bg_input"
+                    android:gravity="center_vertical"
+                    android:hint="留空则发送到本邮箱；多个用逗号分隔"
+                    android:importantForAutofill="no"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:singleLine="true"
+                    android:textColor="@color/text"
+                    android:textColorHint="@color/faint"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/hintProvider"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/bg_hint"
+                    android:lineSpacingExtra="3dp"
+                    android:padding="12dp"
+                    android:textColor="@color/text_soft"
+                    android:textSize="11sp" />
+            </LinearLayout>
+
+            <!-- Webhook panel -->
+            <LinearLayout
+                android:id="@+id/webhookPanel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:text="Webhook 地址"
+                    android:textColor="@color/muted"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/editWebhook"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="6dp"
+                    android:background="@drawable/bg_input"
+                    android:gravity="center_vertical"
+                    android:hint="https://example.com/sms"
+                    android:importantForAutofill="no"
+                    android:inputType="textUri"
+                    android:maxLines="1"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:singleLine="true"
+                    android:textColor="@color/text"
+                    android:textColorHint="@color/faint"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/bg_hint"
+                    android:lineSpacingExtra="3dp"
+                    android:padding="12dp"
+                    android:text="以 HTTPS POST 发送 JSON，字段：event、from、text、received_at、device、android。\n\n可接入自建服务、n8n、Node-RED 等，再由服务转推到 QQ/微信。本机调试允许 http://127.0.0.1。"
+                    android:textColor="@color/text_soft"
+                    android:textSize="11sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnSave"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_button_primary"
+                    android:backgroundTint="@null"
+                    android:fontFamily="sans-serif-medium"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:minHeight="0dp"
+                    android:padding="0dp"
+                    android:stateListAnimator="@null"
+                    android:text="保存配置"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+
+                <Button
+                    android:id="@+id/btnTest"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_button_outline"
+                    android:backgroundTint="@null"
+                    android:fontFamily="sans-serif-medium"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:minHeight="0dp"
+                    android:padding="0dp"
+                    android:stateListAnimator="@null"
+                    android:text="发送测试"
+                    android:textAllCaps="false"
+                    android:textColor="@color/accent"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/configState"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="配置和授权码仅保存在本机"
+                android:textColor="@color/muted"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <!-- Recent logs -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:background="@drawable/bg_card"
+            android:elevation="1dp"
+            android:orientation="vertical"
+            android:outlineProvider="background"
+            android:padding="18dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="最近转发"
+                    android:textColor="@color/text"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/btnAllLogs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="4dp"
+                    android:text="全部记录  →"
+                    android:textColor="@color/accent"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/logContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical" />
+
+            <TextView
+                android:id="@+id/emptyLogs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="14dp"
+                android:paddingBottom="6dp"
+                android:text="还没有记录，收到短信后会自动出现在这里"
+                android:textColor="@color/muted"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <!-- Keep alive -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:background="@drawable/bg_card"
+            android:elevation="1dp"
+            android:orientation="vertical"
+            android:outlineProvider="background"
+            android:padding="18dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-medium"
+                android:text="保持后台运行"
+                android:textColor="@color/text"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:lineSpacingExtra="2dp"
+                android:text="HyperOS 可能限制后台，建议完成以下设置。应用不会替换系统短信 App。"
+                android:textColor="@color/muted"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:lineSpacingExtra="4dp"
+                android:text="1. 授予“短信”权限\n2. 开启“自启动”\n3. 省电策略设为“无限制”\n4. 最近任务中下拉锁定本应用"
+                android:textColor="@color/text_soft"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/batteryState"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="电池优化：检查中…"
+                android:textColor="@color/muted"
+                android:textSize="11sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_hint"
+                android:lineSpacingExtra="3dp"
+                android:padding="12dp"
+                android:text="Android 15/16 提示：如果“短信”权限是灰色，先打开应用信息 → 右上角 ⋮（更多）→ 允许“受限制的设置”，再进入权限开启短信。"
+                android:textColor="@color/text_soft"
+                android:textSize="11sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnAutostart"
+                    android:layout_width="0dp"
+                    android:layout_height="46dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_button_outline"
+                    android:backgroundTint="@null"
+                    android:fontFamily="sans-serif-medium"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:minHeight="0dp"
+                    android:padding="0dp"
+                    android:stateListAnimator="@null"
+                    android:text="自启动设置"
+                    android:textAllCaps="false"
+                    android:textColor="@color/accent"
+                    android:textSize="13sp" />
+
+                <Button
+                    android:id="@+id/btnBattery"
+                    android:layout_width="0dp"
+                    android:layout_height="46dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_button_outline"
+                    android:backgroundTint="@null"
+                    android:fontFamily="sans-serif-medium"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:minHeight="0dp"
+                    android:padding="0dp"
+                    android:stateListAnimator="@null"
+                    android:text="电池设置"
+                    android:textAllCaps="false"
+                    android:textColor="@color/accent"
+                    android:textSize="13sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:gravity="center"
+            android:lineSpacingExtra="3dp"
+            android:text="所有配置与短信内容仅保存在本机。\n转发时只发送到你配置的邮箱或 Webhook。"
+            android:textColor="@color/muted"
+            android:textSize="10sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="v1.0"
+            android:textColor="@color/faint"
+            android:textSize="10sp" />
+    </LinearLayout>
+</ScrollView>

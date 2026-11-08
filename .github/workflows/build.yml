@@ -1,0 +1,37 @@
+name: Build APK
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android platform and build tools
+        shell: pwsh
+        run: sdkmanager "platforms;android-36" "build-tools;36.1.0"
+
+      - name: Build release APK
+        shell: pwsh
+        run: ./build.ps1
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: SmsForwarder-release-ci
+          path: dist/SmsForwarder-release.apk
+          if-no-files-found: error
