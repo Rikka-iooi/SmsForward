@@ -4,6 +4,9 @@
 
 支持 **Android 8.0 – 16**（minSdk 26 / targetSdk 34），已在小米 Redmi Note 14 5G / Android 14 / HyperOS 上完成真机验证；不替换系统短信 App，也不读取历史短信。
 
+**下载成品：** [SmsForwarder-v1.0.apk](release/SmsForwarder-v1.0.apk)  
+SHA256：`82a3f17273c7594ae724450ceccb5673fbbde646722b642fc7de6796b1ad017d`
+
 ![主界面](docs/screenshots/main.png)
 
 ## 为什么首选邮箱 / QQ 邮箱
@@ -47,7 +50,7 @@
 
 ## 安装与首次配置
 
-从 GitHub Releases 下载 `SmsForwarder-release.apk`，或在本地构建后使用 `dist/SmsForwarder-release.apk`。
+直接下载 [SmsForwarder-v1.0.apk](release/SmsForwarder-v1.0.apk)，或在本地构建后使用 `dist/SmsForwarder-release.apk`。
 
 1. 打开 App，点「去授权」，在系统弹窗选择「始终允许」（短信权限）。
    - Android 15/16 若权限是灰色：先到应用信息 → 右上角 ⋮（更多）→「允许受限制的设置」，再开启短信权限。App 会给出同样的指引。
@@ -132,30 +135,7 @@ powershell -ExecutionPolicy Bypass -File .\build.ps1 -Install
 - `dist/SmsForwarder-release.apk`
 - `dist/SmsForwarder-debug.apk`
 
-签名文件在 `signing/`。**升级安装必须使用同一个签名文件**；不要删除或外传该目录。仓库的 `.gitignore` 已排除 `signing/`、`build/`、`dist/`。
-
-## 发布到 GitHub
-
-本目录已经初始化为 Git 仓库并完成首个提交（`Initial release: SMS Forwarder for Android`）。直接添加远端即可：
-
-```bash
-git remote add origin git@github.com:<你的用户名>/<仓库名>.git
-git push -u origin main
-```
-
-如果是从压缩包/裸文件重新开始：
-
-```bash
-git init -b main
-git add .
-git commit -m "Initial release: SMS Forwarder for Android"
-git remote add origin git@github.com:<你的用户名>/<仓库名>.git
-git push -u origin main
-```
-
-然后在 GitHub 创建 Release，上传 `dist/SmsForwarder-release.apk`。不要提交 `signing/` 或包含授权码的配置。
-
-`.github/workflows/build.yml` 会在 push / PR 时用 Windows runner 构建 APK 作为 CI 产物。CI 使用临时签名，**只用于验证能编译**；正式发布包请在本机用 `signing/` 里的固定密钥构建，否则不同构建之间无法覆盖升级。
+签名文件在 `signing/`。**升级安装必须使用同一个签名文件**；不要删除或外传该目录。
 
 ## 已验证 / 未验证
 
@@ -205,10 +185,11 @@ sms-forwarder/
     EmailForwarder.java
     WebhookForwarder.java
   docs/screenshots/     # 不含个人信息的界面截图
+  release/              # 已签名成品 APK
   .github/workflows/    # CI 构建
   tools/                # 仅测试用：本地 Webhook sink / PDU 生成器
-  signing/              # 本机签名密钥（git 忽略，勿删）
-  dist/                 # 本机构建产物（git 忽略）
+  signing/              # 本机签名密钥（勿删）
+  dist/                 # 本机构建产物
 ```
 
 ## License
